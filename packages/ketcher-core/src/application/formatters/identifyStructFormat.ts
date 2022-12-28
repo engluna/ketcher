@@ -32,6 +32,10 @@ export function identifyStructFormat(
     return SupportedFormat.rxn
   }
 
+  if (sanitizedString.indexOf('V2000') !== -1) {
+    return SupportedFormat.mol
+  }
+
   if (sanitizedString.indexOf('V3000') !== -1) {
     return SupportedFormat.molV3000
   }
@@ -47,11 +51,26 @@ export function identifyStructFormat(
       return SupportedFormat.mol
     }
   }
+
   if (
     sanitizedString[0] === '<' &&
     sanitizedString.indexOf('<molecule') !== -1
   ) {
     return SupportedFormat.cml
+  }
+
+  const clearStr = sanitizedString
+    .replace(/\s/g, '')
+    .replace(/(\\r)|(\\n)/g, '')
+  const isBase64String =
+    /^([0-9a-zA-Z+/]{4})*(([0-9a-zA-Z+/]{2}==)|([0-9a-zA-Z+/]{3}=))?$/
+  const cdxHeader = 'VjCD0100'
+  if (
+    clearStr.length % 4 === 0 &&
+    isBase64String.test(clearStr) &&
+    window.atob(clearStr).startsWith(cdxHeader)
+  ) {
+    return SupportedFormat.cdx
   }
 
   if (sanitizedString.slice(0, 5) === 'InChI') {
@@ -66,6 +85,6 @@ export function identifyStructFormat(
   if (sanitizedString.indexOf('<CDXML') !== -1) {
     return SupportedFormat.cdxml
   }
-  // Molfile by default as Indigo does
-  return SupportedFormat.mol
+
+  return SupportedFormat.unknown
 }

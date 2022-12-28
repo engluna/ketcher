@@ -36,7 +36,9 @@ export enum SupportedFormat {
   inChIAuxInfo = 'inChIAuxInfo',
   cml = 'cml',
   ket = 'ket',
-  cdxml = 'cdxml'
+  cdxml = 'cdxml',
+  cdx = 'cdx',
+  unknown = 'unknown'
 }
 
 export type FormatterFactoryOptions = Partial<
