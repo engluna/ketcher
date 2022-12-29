@@ -1,5 +1,11 @@
-ketcherAPI()
+/**
+ * Copyright (c) 2020 mol* contributors, licensed under MIT, See LICENSE file for more info.
+ *
+ * @author Luis Luna <eng.luis.luna@gmail.com>
+ */
 
-export function ketcherAPI() {
-  alert('Running ketcherAPI by Luis Luna')
+export class KetcherCall {
+  ketcherAlert() {
+    alert('Running ketcherAPI by Luis Luna')
+  }
 }
