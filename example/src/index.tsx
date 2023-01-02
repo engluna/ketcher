@@ -5,6 +5,7 @@ import './index.css'
 import ReactDOM from 'react-dom'
 import App from './App'
 
+// @ts-ignore
 import { KetcherCall } from 'ketcher-react'
 
 ReactDOM.render(<App />, document.getElementById('root'))
